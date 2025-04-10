@@ -10,16 +10,18 @@ window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
     installButton.style.display = 'block';
-    
+
     installButton.addEventListener('click', async () => {
         installButton.style.display = 'none';
         deferredPrompt.prompt();
         const { outcome } = await deferredPrompt.userChoice;
+        console.log(`User response to the install prompt: ${outcome}`);
         deferredPrompt = null;
     });
 });
 
 window.addEventListener('appinstalled', () => {
+    console.log('App was installed');
     installButton.style.display = 'none';
 });
 
@@ -45,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const item = marineLife[currentIndex];
                 titleElement.textContent = item.title;
                 descriptionElement.textContent = item.description;
-                
+
                 const img = new Image();
                 img.src = item.image;
                 img.onload = () => {
@@ -57,7 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     audioElement.pause();
                 }
                 audioElement = new Audio(item.audio);
-                
                 playAudioButton.onclick = () => {
                     audioElement.play();
                 };
@@ -68,14 +69,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentIndex = (currentIndex + 1) % marineLife.length;
                 displayContent();
             }, 5000);
-        });
+        })
+        .catch(err => console.error('Error loading JSON data:', err));
 });
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('/project-52/service-worker.js')
             .then(registration => {
-                console.log('ServiceWorker registered');
+                console.log('Service Worker registered');
+            })
+            .catch(error => {
+                console.error('Service Worker registration failed:', error);
             });
     });
 }
