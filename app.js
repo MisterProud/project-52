@@ -15,13 +15,11 @@ window.addEventListener('beforeinstallprompt', (e) => {
         installButton.style.display = 'none';
         deferredPrompt.prompt();
         const { outcome } = await deferredPrompt.userChoice;
-        console.log(`User ${outcome} the install prompt`);
         deferredPrompt = null;
     });
 });
 
 window.addEventListener('appinstalled', () => {
-    console.log('PWA installed');
     installButton.style.display = 'none';
 });
 
@@ -30,7 +28,7 @@ if (window.matchMedia('(display-mode: standalone)').matches) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    fetch('assets/data/marineLife.json')
+    fetch('/project-52/assets/data/marineLife.json')
         .then(response => response.json())
         .then(data => {
             const marineLife = data.marineLife;
@@ -66,23 +64,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             displayContent();
-
             setInterval(() => {
                 currentIndex = (currentIndex + 1) % marineLife.length;
                 displayContent();
             }, 5000);
-        })
-        .catch(error => console.error('Error loading data:', error));
+        });
 });
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js')
+        navigator.serviceWorker.register('/project-52/service-worker.js')
             .then(registration => {
-                console.log('ServiceWorker registration successful');
-            })
-            .catch(err => {
-                console.log('ServiceWorker registration failed: ', err);
+                console.log('ServiceWorker registered');
             });
     });
 }
