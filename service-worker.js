@@ -1,7 +1,7 @@
 const CACHE_NAME = 'marine-life-v4';
 const ASSETS = [
-  '/project-52/',
   '/project-52/index.html',
+  '/project-52/',
   '/project-52/styles.css',
   '/project-52/app.js',
   '/project-52/manifest.json',
