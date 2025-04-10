@@ -1,0 +1,16 @@
+{
+    "marineLife": [
+        {
+            "title": "Dolphin",
+            "description": "Dolphins are intelligent marine mammals known for their playful behavior and echolocation abilities.",
+            "image": "assets/images/dolphin.png",
+            "audio": "assets/audio/dolphin_sound.mp3"
+        },
+        {
+            "title": "Coral Reef",
+            "description": "Coral reefs are diverse underwater ecosystems, home to thousands of marine species.",
+            "image": "assets/images/coral_reef.png",
+            "audio": "assets/audio/ocean_waves.mp3"
+        }
+    ]
+}
